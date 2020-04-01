@@ -1,0 +1,32 @@
+{
+  "name": "@kth/http-responses",
+  "version": "0.0.1",
+  "description": "Simpel standardized http responses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=development node_modules/mocha/bin/mocha ./test/test-*.js ./test/**/test-*.js",
+    "build": "npm audit fix && npm install && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KTH/basic-html-templates.git"
+  },
+  "keywords": [
+    "npm",
+    "kth"
+  ],
+  "author": {
+    "name": "KTH",
+    "email": "infosys@kth.se",
+    "url": "https://github.com/KTH"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KTH/basic-html-templates/issues"
+  },
+  "homepage": "https://github.com/KTH/basic-html-templates#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.1"
+  }
+}
