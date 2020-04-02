@@ -77,7 +77,7 @@ let _send = function send(
   statusCode = statusCodes.OK,
   contentType = contentTypes.HTML
 ) {
-  logger.logRequest(request, statusCode, _getClientIp(request));
+  logger.logRequest(request, statusCode);
   response.set("X-Frame-Options", "sameorigin");
   response.set("Content-Type", contentType);
   response.status(statusCode).send(bodyContent);

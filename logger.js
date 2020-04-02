@@ -39,15 +39,40 @@ logger.init({
  * Log incomming request if env LOG_REQUEST is set.
  * E.g:  http://localhost:3000/_about - Response Code: 200, Client IP: 127.0.0.1
  */
-let logRequest = function logRequest(request, statusCode, clientIp) {
+let logRequest = function logRequest(request, statusCode) {
   if (process.env.LOG_REQUEST) {
     logger.info(
       `${request.method} ${request.protocol}://${request.get("Host")}${
         request.url
-      } - Response: ${statusCode}, Client IP: ${clientIp}`
+      } - Response: ${statusCode}, Client IP: ${getClientIp(request)}`
     );
     logger.debug(`Request headers: ${JSON.stringify(request.headers)}`);
   }
+};
+
+/**
+ * Gets out the requestors IP.
+ * The IP is found on differnt places depending on
+ * if the service is accessed directly or via proxy.
+ */
+let getClientIp = function getClientIp(request) {
+  let result = request.headers["x-forwarded-for"];
+
+  if (result == null) {
+    if (request.connection && request.connection.remoteAddress) {
+      result = request.connection.remoteAddress;
+    }
+  }
+
+  if (result == null) {
+    result = request.ip;
+  }
+
+  if (result == null) {
+    result = "missing remote ip";
+  }
+
+  return result;
 };
 
 /**
