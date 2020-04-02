@@ -36,18 +36,19 @@ logger.init({
 });
 
 /**
- * Log incomming request if env LOG_REQUEST is set.
+ * Log incomming request unless if env DISABLE_REQUEST_LOGGING is set.
  * E.g:  http://localhost:3000/_about - Response Code: 200, Client IP: 127.0.0.1
  */
 let logRequest = function logRequest(request, statusCode) {
-  if (process.env.LOG_REQUEST) {
-    logger.info(
-      `${request.method} ${request.protocol}://${request.get("Host")}${
-        request.url
-      } - Response: ${statusCode}, Client IP: ${getClientIp(request)}`
-    );
-    logger.debug(`Request headers: ${JSON.stringify(request.headers)}`);
+  if (process.env.DISABLE_REQUEST_LOGGING) {
+    return;
   }
+  logger.info(
+    `${request.method} ${request.protocol}://${request.get("Host")}${
+      request.url
+    } - Response: ${statusCode}, Client IP: ${getClientIp(request)}`
+  );
+  logger.debug(`Request headers: ${JSON.stringify(request.headers)}`);
 };
 
 /**

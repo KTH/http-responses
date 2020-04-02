@@ -1,6 +1,6 @@
 {
   "name": "@kth/http-responses",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simpel standardized http responses.",
   "main": "index.js",
   "scripts": {
