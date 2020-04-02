@@ -1,5 +1,7 @@
 "use strict";
 
+const logger = require("./logger");
+
 const contentTypes = {
   PLAIN_TEXT: "text/plain",
   HTML: "text/html",
@@ -23,6 +25,7 @@ let _ok = function ok(
   body,
   contentType = contentTypes.HTML
 ) {
+  logger.log.debug("Using contentType: " + contentType);
   _send(request, response, body, statusCodes.OK, contentType);
 };
 
@@ -74,6 +77,7 @@ let _send = function send(
   statusCode = statusCodes.OK,
   contentType = contentTypes.HTML
 ) {
+  logger.logRequest(request, statusCode, _getClientIp(request));
   response.set("X-Frame-Options", "sameorigin");
   response.set("Content-Type", contentType);
   response.status(statusCode).send(bodyContent);
