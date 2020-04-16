@@ -5,14 +5,15 @@ const logger = require("./logger");
 const contentTypes = {
   PLAIN_TEXT: "text/plain",
   HTML: "text/html",
-  JSON: "application/json"
+  JSON: "application/json",
 };
 
 const statusCodes = {
   OK: 200,
   NO_CONTENT: 204,
   NOT_FOUND: 404,
-  INTERNAL_SERVER_ERROR: 501
+  INTERNAL_SERVER_ERROR: 501,
+  BAD_GATEWAY: 502,
 };
 
 /**
@@ -66,6 +67,19 @@ let _internalServerError = function internalServerError(
 };
 
 /**
+ * Send status bad gateway server error with a body set to the content type.
+ * Default content type is text/html.
+ */
+let _badGateway = function badGateway(
+  request,
+  response,
+  body = `${statusCodes.BAD_GATEWAY} Bad Gateway`,
+  contentType = contentTypes.HTML
+) {
+  _send(request, response, body, statusCodes.BAD_GATEWAY, contentType);
+};
+
+/**
  * Send the content type with the passed status code.
  * Default content type is text/html.
  * Default status code is 200.
@@ -91,6 +105,7 @@ module.exports = {
   notFound: _notFound,
   noContent: _noContent,
   internalServerError: _internalServerError,
+  badGateway: _badGateway,
   statusCodes: statusCodes,
-  contentTypes: contentTypes
+  contentTypes: contentTypes,
 };
