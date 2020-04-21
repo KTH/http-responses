@@ -1,5 +1,7 @@
 # HTTP Responses ![alt text](https://api.travis-ci.org/KTH/http-responses.svg?branch=master)
 
+Simple ways of returning responses.
+
 ```javascript
 const { templates } = require("@kth/basic-html-templates");
 const httpResponse = require("@kth/http-responses");
