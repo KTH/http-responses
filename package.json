@@ -1,6 +1,7 @@
 {
   "name": "@kth/http-responses",
   "version": "1.0.2",
+  "automaticPublish": "true",
   "description": "Simpel standardized http responses.",
   "main": "index.js",
   "scripts": {
