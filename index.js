@@ -96,7 +96,7 @@ let _send = function send(
   response.set("Content-Type", contentType);
   response.set(
     "X-KTH",
-    "Black Lifes Matter, HBTQI or just love. Let´s make this world a little bit better, for a brighter tomorrow."
+    "Black Lives Matter, HBTQI or just love. Lets make this world a little bit better, for a brighter tomorrow."
   );
   response.status(statusCode).send(bodyContent);
 };
