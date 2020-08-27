@@ -94,6 +94,10 @@ let _send = function send(
   logger.logRequest(request, statusCode);
   response.set("X-Frame-Options", "sameorigin");
   response.set("Content-Type", contentType);
+  response.set(
+    "X-KTH",
+    "Black Lifes Matter, HBTQI or just ❤️. Let´s make this world a little bit better, for a brighter tomorrow."
+  );
   response.status(statusCode).send(bodyContent);
 };
 
