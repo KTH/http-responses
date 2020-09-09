@@ -1,14 +1,3 @@
-# HTTP Responses ![alt text](https://api.travis-ci.org/KTH/http-responses.svg?branch=master)
-
-Simple ways of returning responses. Note that it is not async so use it for simple smal stuff.
-
-
-## Demo application
-
-[Demo code source here](https://github.com/KTH/http-responses/tree/master/demo-app/).
-
-
-```javascript
 const express = require("express");
 const httpResponse = require("@kth/http-responses");
 const app = express();
@@ -41,22 +30,3 @@ app.use(function (request, response) {
 app.listen(80, function () {
   console.log("Server started");
 });
-```
-
-```json
-{
-  "name": "Demo",
-  "version": "1.0.0",
-  "description": "Demo app for @kth/http-responses",
-  "main": "index.js",
-  "scripts": {
-    "clean": "rm -r ./node_modules && rm package-lock.json"
-  },
-  "author": "paddy@kth.se",
-  "license": "MIT",
-  "dependencies": {
-    "@kth/http-responses": "^1.0.20",
-    "express": "^4.17.1"
-  }
-}
-```
