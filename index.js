@@ -93,7 +93,7 @@ let _send = function send(
   statusCode = statusCodes.OK,
   contentType = contentTypes.HTML
 ) {
-  logRequest(request, statusCode, log);
+  logRequest(request, statusCode, logger);
   response.set("X-Frame-Options", "sameorigin");
   response.set("Content-Type", contentType);
   response.set(
