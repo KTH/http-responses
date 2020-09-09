@@ -1,6 +1,8 @@
 "use strict";
 
-const logger = require("./logger");
+let logger = console;
+
+const { logRequest } = require("./logRequest");
 
 const contentTypes = {
   PLAIN_TEXT: "text/plain",
@@ -26,7 +28,7 @@ let _ok = function ok(
   body,
   contentType = contentTypes.HTML
 ) {
-  logger.log.debug("Using contentType: " + contentType);
+  logger.debug("Using contentType: " + contentType);
   _send(request, response, body, statusCodes.OK, contentType);
 };
 
@@ -91,7 +93,7 @@ let _send = function send(
   statusCode = statusCodes.OK,
   contentType = contentTypes.HTML
 ) {
-  logger.logRequest(request, statusCode);
+  logRequest(request, statusCode, log);
   response.set("X-Frame-Options", "sameorigin");
   response.set("Content-Type", contentType);
   response.set(
@@ -99,6 +101,14 @@ let _send = function send(
     "Black Lives Matter, HBTQI or just love. Lets make this world a little bit better, for a brighter tomorrow."
   );
   response.status(statusCode).send(bodyContent);
+};
+
+/**
+ * Set a logger of your choice that implements functions debug, info, warn and error.
+ * @param {*} log
+ */
+const setLogger = (log) => {
+  logger = log;
 };
 
 /**
@@ -112,4 +122,5 @@ module.exports = {
   badGateway: _badGateway,
   statusCodes: statusCodes,
   contentTypes: contentTypes,
+  setLogger: setLogger,
 };
