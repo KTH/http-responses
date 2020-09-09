@@ -1,6 +1,7 @@
 # HTTP Responses ![alt text](https://api.travis-ci.org/KTH/http-responses.svg?branch=master)
 
-Simple ways of returning responses. Note that it is not async so use it for simple smal stuff.
+Simple ways of returning responses in a declarative way without status codes.
+Note that it is not async so use it for simple smal stuff.
 
 
 ## Demo application
