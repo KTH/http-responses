@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=development node_modules/mocha/bin/mocha ./test/test-*.js ./test/**/test-*.js",
-    "build": "npm audit fix && npm install && npm test"
+    "build": "npm audit fix && npm install && npm test",
+    "clean": "rm -r ./node_modules && rm package-lock.json"
   },
   "repository": {
     "type": "git",
@@ -28,9 +29,9 @@
   "homepage": "https://github.com/KTH/basic-html-templates#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.1.2"
+    "mocha": "^8.2.0"
   },
   "dependencies": {
-    "kth-node-log": "^3.1.0"
+    "kth-node-log": "^3.1.3"
   }
 }
