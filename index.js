@@ -25,7 +25,6 @@ const statusCodes = {
  */
 let _addDefaultHeaders = function addDefaultHeaders(response) {
   response.set("X-Frame-Options", "sameorigin");
-  response.set("Content-Type", contentType);
   response.set(
     "X-KTH",
     "Black Lives Matter, HBTQI or just love. Lets make this world a little bit better, for a brighter tomorrow."
@@ -50,7 +49,7 @@ let _ok = function ok(
  * Redirect to a url with a status code.
  */
 let _redirect = function redirect(response, statusCode, url) {
-  addDefaultHeaders(response);
+  _addDefaultHeaders(response);
   response.redirect(statusCode, url);
 };
 
