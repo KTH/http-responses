@@ -137,12 +137,15 @@ let _send = function send(
   contentType = contentTypes.HTML
 ) {
   logRequest(request, statusCode, logger);
-  response.set("X-Frame-Options", "sameorigin");
+  _addDefaultHeaders(response);
   response.set("Content-Type", contentType);
+  /*
+  response.set("X-Frame-Options", "sameorigin");
   response.set(
     "X-KTH",
     "Black Lives Matter, HBTQI or just love. Lets make this world a little bit better, for a brighter tomorrow."
   );
+  */
   response.status(statusCode).send(bodyContent);
 };
 
