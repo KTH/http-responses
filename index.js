@@ -13,6 +13,7 @@ const contentTypes = {
 const statusCodes = {
   OK: 200,
   NO_CONTENT: 204,
+  MOVED_PERMANENTLY: 301,
   NOT_FOUND: 404,
   INTERNAL_SERVER_ERROR: 500,
   BAD_GATEWAY: 502,
