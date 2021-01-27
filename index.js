@@ -49,8 +49,7 @@ let _ok = function ok(
 /**
  * Redirect to a url with a status code.
  */
-let _redirect = function redirect(statusCode, url) {
-  logRequest(request, statusCode, logger);
+let _redirect = function redirect(response, statusCode, url) {
   addDefaultHeaders(response);
   response.redirect(statusCode, url);
 };
@@ -59,8 +58,8 @@ let _redirect = function redirect(statusCode, url) {
  * Send a temporary redirect to the client redirectint to a url.
  * Normally a bad option, but good if the redirect really is temporary.
  */
-let _temporaryRedirect = function temporaryRedirect(url) {
-  _redirect(statusCodes.temporaryRedirect, url);
+let _temporaryRedirect = function temporaryRedirect(response, url) {
+  _redirect(response, statusCodes.TEMPORARY_REDIRECT, url);
 };
 
 /**
@@ -68,8 +67,8 @@ let _temporaryRedirect = function temporaryRedirect(url) {
  * This is the option you use if SEO is important when following links.
  * A permanent redirect will be cached in the client browser for some time.
  */
-let _permanentRedirect = function permanentRedirect(url) {
-  _redirect(statusCodes.MOVED_PERMANENTLY, url);
+let _permanentRedirect = function permanentRedirect(response, url) {
+  _redirect(response, statusCodes.MOVED_PERMANENTLY, url);
 };
 
 /**
