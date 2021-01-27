@@ -52,7 +52,7 @@ let _ok = function ok(
 let _redirect = function redirect(statusCode, url) {
   logRequest(request, statusCode, logger);
   addDefaultHeaders(response);
-  response.redirect(statusCodes.MOVED_PERMANENTLY, url);
+  response.redirect(statusCode, url);
 };
 
 /**
@@ -60,7 +60,7 @@ let _redirect = function redirect(statusCode, url) {
  * Normally a bad option, but good if the redirect really is temporary.
  */
 let _temporaryRedirect = function temporaryRedirect(url) {
-  _redirect(statusCode.TEMPORARY_REDIRECT, url);
+  _redirect(statusCodes.temporaryRedirect, url);
 };
 
 /**
@@ -69,7 +69,7 @@ let _temporaryRedirect = function temporaryRedirect(url) {
  * A permanent redirect will be cached in the client browser for some time.
  */
 let _permanentRedirect = function permanentRedirect(url) {
-  _redirect(statusCode.MOVED_PERMANENTLY, url);
+  _redirect(statusCodes.MOVED_PERMANENTLY, url);
 };
 
 /**
