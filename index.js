@@ -14,9 +14,22 @@ const statusCodes = {
   OK: 200,
   NO_CONTENT: 204,
   MOVED_PERMANENTLY: 301,
+  TEMPORARY_REDIRECT: 307,
   NOT_FOUND: 404,
   INTERNAL_SERVER_ERROR: 500,
   BAD_GATEWAY: 502,
+};
+
+/**
+ * Set default headers.
+ */
+let _addDefaultHeaders = function addDefaultHeaders(response) {
+  response.set("X-Frame-Options", "sameorigin");
+  response.set("Content-Type", contentType);
+  response.set(
+    "X-KTH",
+    "Black Lives Matter, HBTQI or just love. Lets make this world a little bit better, for a brighter tomorrow."
+  );
 };
 
 /**
@@ -34,6 +47,32 @@ let _ok = function ok(
 };
 
 /**
+ * Redirect to a url with a status code.
+ */
+let _redirect = function redirect(statusCode, url) {
+  logRequest(request, statusCode, logger);
+  addDefaultHeaders(response);
+  response.redirect(statusCodes.MOVED_PERMANENTLY, url);
+};
+
+/**
+ * Send a temporary redirect to the client redirectint to a url.
+ * Normally a bad option, but good if the redirect really is temporary.
+ */
+let _temporaryRedirect = function temporaryRedirect(url) {
+  _redirect(statusCode.TEMPORARY_REDIRECT, url);
+};
+
+/**
+ * Send a permanent redirect to the client redirectint to a url.
+ * This is the option you use if SEO is important when following links.
+ * A permanent redirect will be cached in the client browser for some time.
+ */
+let _permanentRedirect = function permanentRedirect(url) {
+  _redirect(statusCode.MOVED_PERMANENTLY, url);
+};
+
+/**
  * Send status 404 with a body set to the content type.
  * Default content type is text/html.
  */
@@ -46,6 +85,11 @@ let _notFound = function notFound(
   _send(request, response, body, statusCodes.NOT_FOUND, contentType);
 };
 
+/**
+ * An empty body should be sent for a ok request.
+ * @param {} request
+ * @param {*} response
+ */
 let _noContent = function noContent(request, response) {
   _send(request, response, "", statusCodes.NO_CONTENT, contentTypes.PLAIN_TEXT);
 };
@@ -121,6 +165,8 @@ module.exports = {
   noContent: _noContent,
   internalServerError: _internalServerError,
   badGateway: _badGateway,
+  permanentRedirect: _permanentRedirect,
+  temporaryRedirect: _temporaryRedirect,
   statusCodes: statusCodes,
   contentTypes: contentTypes,
   setLogger: setLogger,
