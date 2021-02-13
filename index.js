@@ -50,7 +50,7 @@ let _ok = function ok(
  */
 let _redirect = function redirect(response, statusCode, url) {
   _addDefaultHeaders(response);
-  response.redirect(url, statusCode);
+  response.status(statusCode).redirect(url);
 };
 
 /**
