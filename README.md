@@ -1,4 +1,4 @@
-# HTTP Responses ![alt text](https://api.travis-ci.org/KTH/http-responses.svg?branch=master)
+# HTTP Responses ![alt text](https://api.travis-ci.org/KTH/http-responses.svg?branch=master) ![Continous Integration](https://github.com/KTH/http-responses/actions/workflows/main.yml/badge.svg)
 
 Npm: `@kth/http-responses`
 
