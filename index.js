@@ -15,6 +15,7 @@ const statusCodes = {
   NO_CONTENT: 204,
   MOVED_PERMANENTLY: 301,
   TEMPORARY_REDIRECT: 307,
+  FORBIDDEN: 403,
   NOT_FOUND: 404,
   INTERNAL_SERVER_ERROR: 500,
   BAD_GATEWAY: 502,
@@ -94,6 +95,7 @@ let _noContent = function noContent(request, response) {
 
 /**
  * Send status internal server error with a body set to the content type.
+ *
  * Default content type is text/html.
  */
 let _internalServerError = function internalServerError(
@@ -113,6 +115,7 @@ let _internalServerError = function internalServerError(
 
 /**
  * Send status bad gateway server error with a body set to the content type.
+ *
  * Default content type is text/html.
  */
 let _badGateway = function badGateway(
@@ -125,7 +128,24 @@ let _badGateway = function badGateway(
 };
 
 /**
+ * Send status forbidden with a body set to the content type. Forbidden means
+ * that that the user is authenticated but do not have permission to access the
+ * uri requested.
+ *
+ * Default content type is text/html.
+ */
+let _forbidden = function badGateway(
+  request,
+  response,
+  body = `${statusCodes.FORBIDDEN} Forbidden`,
+  contentType = contentTypes.HTML
+) {
+  _send(request, response, body, statusCodes.FORBIDDEN, contentType);
+};
+
+/**
  * Send the content type with the passed status code.
+ *
  * Default content type is text/html.
  * Default status code is 200.
  */
@@ -139,13 +159,7 @@ let _send = function send(
   logRequest(request, statusCode, logger);
   _addDefaultHeaders(response);
   response.set("Content-Type", contentType);
-  /*
-  response.set("X-Frame-Options", "sameorigin");
-  response.set(
-    "X-KTH",
-    "Black Lives Matter, HBTQI or just love. Lets make this world a little bit better, for a brighter tomorrow."
-  );
-  */
+
   response.status(statusCode).send(bodyContent);
 };
 
@@ -165,6 +179,7 @@ module.exports = {
   notFound: _notFound,
   noContent: _noContent,
   internalServerError: _internalServerError,
+  forbidden: _forbidden,
   badGateway: _badGateway,
   permanentRedirect: _permanentRedirect,
   temporaryRedirect: _temporaryRedirect,
