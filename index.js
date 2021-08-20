@@ -30,6 +30,10 @@ let _addDefaultHeaders = function addDefaultHeaders(response) {
     "X-KTH",
     "Black Lives Matter, HBTQI or just love. Lets make this world a little bit better, for a brighter tomorrow."
   );
+  response.set(
+    "X-KTH-APPLY",
+    "Hi, looking for something, maybe a new job? Drop me a message at paddy@kth.se"
+  );
 };
 
 /**
