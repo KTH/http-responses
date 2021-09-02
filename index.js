@@ -28,7 +28,7 @@ let _addDefaultHeaders = function addDefaultHeaders(response) {
   response.set("X-Frame-Options", "sameorigin");
   response.set(
     "X-KTH",
-    "Black Lives Matter, HBTQI or just love. Lets make this world a little bit better, for a brighter tomorrow."
+    "Black Lives Matter, HBTQIA+ or just love. Lets make this world a little bit better, for a brighter tomorrow."
   );
   response.set(
     "X-KTH-APPLY",
